@@ -1,5 +1,4 @@
 ﻿using PowerCoWebSite.Data.Repositories;
-using PowerCoWebSite.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace PowerCoWebSite.ViewModels
@@ -18,9 +17,9 @@ namespace PowerCoWebSite.ViewModels
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        public bool IsUserExists(string name, string password)
+        public bool IsUserExists()
         {
-            return usersRepository.IsUserExists(name, password);
+            return usersRepository.IsUserExists(Name, Password);
         }
     }
 }

@@ -18,7 +18,7 @@ namespace PowerCoWebSite.Controllers
             if (ModelState.IsValid)
             {
                 // if user is not in database then notify user that he entered wrong password or user name
-                if (!form.IsUserExists(form.Name, form.Password))
+                if (!form.IsUserExists())
                 {
                     ModelState.AddModelError("LoginError", "The user name or password provided is incorrect.");
                 }

@@ -159,6 +159,7 @@
     <Compile Include="ViewModels\EmployeesViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\NewEmployeeViewModel.cs" />
+    <Compile Include="ViewModels\RegisterViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

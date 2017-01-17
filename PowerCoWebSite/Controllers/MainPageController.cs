@@ -1,8 +1,6 @@
-﻿using PowerCoWebSite.Data;
-using PowerCoWebSite.Models;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Security;
-using System.Linq;
+using PowerCoWebSite.ViewModels;
 
 namespace PowerCoWebSite.Controllers
 {
@@ -19,32 +17,19 @@ namespace PowerCoWebSite.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(User form, string returnUrl)
+        public ActionResult Register(RegisterViewModel form, string returnUrl)
         {
-            bool userExist;
-            using (var context = new PowerCoEntity())
+            if (form.RegisterUser())
             {
-                userExist = context.Users.Any(u => u.Name == form.Name);
-            }
-
-            if (!userExist)
-            {
-                User user = new User();
-                user.Name = form.Name;
-                user.Email = form.Email;
-                user.Password = form.Password;
-                user.Roles.Add(new Role { Id = 2, Name = "User"});
-
-                using (var context = new PowerCoEntity())
-                {
-                    context.Users.Add(user);
-                    context.SaveChanges();
-                }
-
                 FormsAuthentication.SetAuthCookie(form.Name, true);
 
                 if (!string.IsNullOrWhiteSpace(returnUrl))
                     return Redirect(returnUrl);
+            }
+            else
+            {
+                ModelState.AddModelError("RegistrationError", "This user name already exist");
+                return View(form);
             }
 
             return RedirectToAction("Index");
