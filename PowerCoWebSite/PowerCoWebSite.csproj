@@ -138,6 +138,8 @@
     <Compile Include="Controllers\EmployeeManagementController.cs" />
     <Compile Include="Controllers\MainPageController.cs" />
     <Compile Include="Data\PowerCoEntity.cs" />
+    <Compile Include="Data\Repositories\IUsersRepository.cs" />
+    <Compile Include="Data\Repositories\UsersRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
