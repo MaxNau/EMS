@@ -1,0 +1,146 @@
+﻿@using System.Web.Optimization
+
+@{
+    Layout = null;
+}
+
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>MainPage</title>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+    @Styles.Render("~/styles")
+    @Scripts.Render("~/scripts")
+</head>
+
+<nav>
+    <ul id="nav">
+        <li>
+            @Html.ActionLink("POWERCO", "Index", "MainPage")
+        </li>
+        <li>
+            @Html.ActionLink("Company", "Company", "MainPage")
+            <ul>
+                <li>@Html.ActionLink("About", "About", "MainPage")</li>
+                <li>@Html.ActionLink("Our Team", "Team", "MainPage")</li>
+            </ul>
+        </li>
+        <li>
+            @Html.ActionLink("Contacts", "Contacts", "MainPage")
+            <ul>
+                <li>@Html.ActionLink("Our Office", "Contacts", "MainPage")</li>
+            </ul>
+        </li>
+        <li>
+            @if (User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("EMS", "EmployeesManagementIndex", "EmployeeManagement")
+            }
+        </li>
+        <li class="mpull-right">
+            @if (User.Identity.IsAuthenticated)
+            {
+                @Html.ActionLink("Logout", "Logout", "Auth")
+            }
+            else
+            {
+                @Html.ActionLink("Register", "Register", "MainPage")
+            }
+        </li>
+
+        <li class="mpull-right">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a> Welcome, @User.Identity.Name </a>
+            }
+            else
+            {
+                @Html.ActionLink("Login", "Login", "Auth")
+            }
+        </li>
+
+    </ul>
+</nav>
+
+<body style="background-image:url(http://citycelebrity.ru/userfiles/DSC_3138.jpg); background-size:cover;">
+    <div id="bodycontainer">
+
+        @RenderBody()
+
+    </div>
+
+    <div id="modal-container" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-content mymodalcont">
+        </div>
+    </div>
+
+    @RenderSection("Scripts", false)
+
+</body>
+
+<div style="background-color:black; width:100%; height:200px;">
+    <div style="width: 100%; float: left; padding: 0px 150px 0 150px">
+        <div style="float: left; width: 25%;">
+            <div style="margin: 10px; padding: 10px; padding-bottom:0">
+                <h4 style="color:goldenrod; text-align:center">Headquarters</h4>
+                <p style="color:goldenrod; text-align:center">7304 Bridgeton Ave.</p>
+                <p style="color:goldenrod; text-align:center">Philadelphia</p>
+                <p style="color:goldenrod; text-align:center">PA 19111</p>
+            </div>
+        </div>
+        <div style="float: left; width: 25%;">
+            <div style="margin: 10px; padding: 10px; padding-bottom:0">
+                <h4 style="color:goldenrod; text-align:center">Company</h4>
+                <p style="text-align:center">@Html.ActionLink("About", "About", "MainPage", new { @style = "color:goldenrod" })</p>
+                <p style="text-align:center">@Html.ActionLink("Our Team", "Team", "MainPage", new { @style = "color:goldenrod" })</p>
+            </div>
+        </div>
+        <div style="float: left; width: 25%; ">
+            <div style="margin: 10px; padding: 10px; padding-bottom:0">
+                <h4 style="color:goldenrod; text-align:center">Contacts</h4>
+                <p style="text-align:center">@Html.ActionLink("Our Office", "Contacts", "MainPage", new { @style = "color:goldenrod" })</p>
+                <p style="text-align:center">@Html.ActionLink("Contact Us", "ContactUs", "MainPage", new { @style = "color:goldenrod" })</p>
+            </div>
+        </div>
+        <div style="float: left; width: 25%;">
+            <div style="margin: 10px; padding: 10px; padding-bottom:0">
+                <a href="https://www.linkedin.com/">
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-square fa-stack-2x" style="color:white"></i>
+                        <i class="fa fa-facebook fa-stack-1x" style="color:goldenrod"></i>
+                    </span>
+                </a>
+                <a href="https://www.linkedin.com/">
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-square fa-stack-2x" style="color:white"></i>
+                        <i class="fa fa-linkedin fa-stack-1x" style="color:goldenrod"></i>
+                    </span>
+                </a>
+                <a href="https://www.linkedin.com/">
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-square fa-stack-2x" style="color:white"></i>
+                        <i class="fa fa-twitter fa-stack-1x" style="color:goldenrod"></i>
+                    </span>
+                </a>
+                <a href="https://www.linkedin.com/">
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-square fa-stack-2x" style="color:white"></i>
+                        <i class="fa fa-google-plus fa-stack-1x" style="color:goldenrod"></i>
+                    </span>
+                </a>
+                <a href="https://www.linkedin.com/">
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-square fa-stack-2x" style="color:white"></i>
+                        <i class="fa fa-vk fa-stack-1x" style="color:goldenrod"></i>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div style="clear: both;"></div>
+    <div style="color:white; text-align: center">
+        © 2016 Globalize
+    </div>
+</div>
+
