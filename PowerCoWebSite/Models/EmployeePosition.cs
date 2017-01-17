@@ -1,6 +1,4 @@
-﻿using PowerCo.Model;
-using System.Collections.Generic;
-
+﻿
 namespace PowerCoWebSite.Models
 {
     public class EmployeePosition

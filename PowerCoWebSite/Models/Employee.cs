@@ -1,6 +1,4 @@
 ﻿
-using PowerCoWebSite.Models;
-
 namespace PowerCo.Model
 {
     public class Employee

@@ -2,9 +2,7 @@ namespace PowerCoWebSite.Data
 {
     using PowerCo.Model;
     using PowerCoWebSite.Models;
-    using System;
     using System.Data.Entity;
-    using System.Linq;
 
     public class PowerCoEntity : DbContext
     {

@@ -1,5 +1,4 @@
-﻿
-using PowerCo.Model;
+﻿using PowerCo.Model;
 using PowerCoWebSite.Data;
 using PowerCoWebSite.Models;
 using System.Collections.Generic;
