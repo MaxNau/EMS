@@ -15,10 +15,6 @@ namespace PowerCoWebSite.Controllers
             if (User.IsInRole("Admin"))
             {
                 EmployeesViewModel evm = new EmployeesViewModel();
-                using (var context = new PowerCoEntity())
-                {
-                    evm.Employees = context.Employees.ToList();
-                }
 
                 return View(evm);
             }
@@ -68,18 +64,11 @@ namespace PowerCoWebSite.Controllers
         {
             if (User.IsInRole("Admin"))
             {
-                Employee employee;
+                EditEmployeeViewModel evm = new EditEmployeeViewModel();
+                evm.GetEmployee(id);
+                evm.SetDropDownListCurrentItems();
 
-                using (var context = new PowerCoEntity())
-                {
-                    employee = context.Employees.FirstOrDefault(e => id == e.EmployeeId);
-                }
-
-                return View(new EditEmployeeViewModel(employee.DepartmentName, employee.Position)
-                {
-                    FullName = employee.FullName,
-                    Salary = employee.Salary
-                });
+                return View(evm);
             }
 
             return RedirectToAction("Index", "MainPage");
@@ -91,21 +80,7 @@ namespace PowerCoWebSite.Controllers
             if (!ModelState.IsValid)
                 return View(form);
 
-            Employee employee;
-
-            using (var context = new PowerCoEntity())
-            {
-                employee = context.Employees.FirstOrDefault(e => e.EmployeeId == id);
-            }
-
-            using (var context = new PowerCoEntity())
-            {
-                employee.Position = context.EmployeePositions.FirstOrDefault(d => d.Id == form.SelectedPositionId).Name;
-                employee.DepartmentName = context.Deprtments.FirstOrDefault(d => d.DepartmentId == form.SelectedDepartmentId).DepartmentName;
-                employee.Head = context.Employees.FirstOrDefault(e => e.EmployeeId == form.SelectedHeadId).FullName;
-                context.Entry(employee).State = EntityState.Modified;
-                context.SaveChanges();
-            }
+            form.ModifyEmployee(id);
 
             return RedirectToAction("EmployeesManagementIndex");
         }
@@ -113,15 +88,8 @@ namespace PowerCoWebSite.Controllers
         [HttpPost]
         public ActionResult DeleteEmployee(int id)
         {
-            Employee employee;
-
-            using (var context = new PowerCoEntity())
-            {
-                employee = context.Employees.FirstOrDefault(e => id == e.EmployeeId);
-                context.Employees.Remove(employee);
-                context.SaveChanges();
-            }
-
+            EditEmployeeViewModel evm = new EditEmployeeViewModel();
+            evm.RemoveEmployee(id);
             return RedirectToAction("EmployeesManagementIndex");
         }
     }

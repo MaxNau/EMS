@@ -24,6 +24,9 @@ namespace PowerCoWebSite.ViewModels
 
         public bool RegisterUser()
         {
+            // if user name exists return false
+            // else register user 
+            // TODO: check if email is already taken
             if (IsUserNameExists())
             {
                 return false;

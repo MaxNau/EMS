@@ -116,3 +116,11 @@ nav {
     color: #FFBF00;
 }
 
+.m_container {
+    background-color: white;
+    background: rgba(255,255,255,0.8);
+    text-align: center;
+    width: 100%;
+    margin: 0px auto 0px auto;
+}
+
