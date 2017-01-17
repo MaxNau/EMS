@@ -18,9 +18,9 @@ namespace PowerCoWebSite.ViewModels
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        public User GetUser(string name, string password)
+        public bool IsUserExists(string name, string password)
         {
-            return usersRepository.GetUser(name, password);
+            return usersRepository.IsUserExists(name, password);
         }
     }
 }

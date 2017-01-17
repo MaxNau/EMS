@@ -17,17 +17,14 @@ namespace PowerCoWebSite.Controllers
         {
             if (ModelState.IsValid)
             {
-                // find user in database
-                var user = form.GetUser(form.Name, form.Password);
-
                 // if user is not in database then notify user that he entered wrong password or user name
-                if (user == null)
+                if (!form.IsUserExists(form.Name, form.Password))
                 {
                     ModelState.AddModelError("LoginError", "The user name or password provided is incorrect.");
                 }
                 else
                 {
-                    // authenticate user and add him to the coockies collection. kepp user loged in
+                    // authenticate user and add him to the coockies collection. Keep user loged in
                     FormsAuthentication.SetAuthCookie(form.Name, true);
 
                     //Redirect user to main page

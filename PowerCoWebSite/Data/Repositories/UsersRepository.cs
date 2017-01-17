@@ -1,16 +1,14 @@
-﻿using PowerCoWebSite.Models;
-using System.Linq;
+﻿using System.Linq;
 
 namespace PowerCoWebSite.Data.Repositories
 {
     public class UsersRepository : IUsersRepository
     {
-        public User GetUser(string name, string password)
+        public bool IsUserExists(string name, string password)
         {
-            User user;
             using (var context = new PowerCoEntity())
             {
-                return user = context.Users.FirstOrDefault(u => u.Name == name && u.Password == password);
+                return context.Users.Any(u => u.Name == name && u.Password == password);
             }
         }
     }
