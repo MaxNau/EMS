@@ -7,7 +7,7 @@ namespace PowerCoWebSite.Data.Repositories
     {
         List<Employee> GetEmployees();
         Employee GetEmployee(int id);
-        void AddEmployee();
+        void AddEmployee(Employee employee);
         void RemoveEmployee(int id);
         void ModifyEmployee(Employee employee);
     }

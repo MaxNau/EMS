@@ -37,26 +37,7 @@ namespace PowerCoWebSite.Controllers
             if (!ModelState.IsValid)
                 return View(form);
 
-            var employee = new Employee
-            {
-                FullName = form.FullName,
-                Head = form.Head,
-                Salary = form.Salary,
-            };
-
-            using (var context = new PowerCoEntity())
-            {
-                employee.Position= context.EmployeePositions.FirstOrDefault(d => d.Id== form.SelectedPositionId);
-                employee.Department = context.Deprtments.FirstOrDefault(d => d.DepartmentId == form.SelectedDepartmentId);
-            }
-
-            using (var context = new PowerCoEntity())
-            {
-                context.EmployeePositions.Attach(employee.Position);
-                context.Deprtments.Attach(employee.Department);
-                context.Employees.Add(employee);
-                context.SaveChanges();
-            }
+            form.AddEmployee();
 
             return RedirectToAction("EmployeesManagementIndex");
         }

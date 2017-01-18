@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using PowerCo.Model;
 using System.Linq;
 using System.Data.Entity;
@@ -8,9 +7,15 @@ namespace PowerCoWebSite.Data.Repositories
 {
     public class EmployeesRepository : IEmployeesRepository
     {
-        public void AddEmployee()
+        public void AddEmployee(Employee employee)
         {
-            throw new NotImplementedException();
+            using (var context = new PowerCoEntity())
+            {
+                context.EmployeePositions.Attach(employee.Position);
+                context.Deprtments.Attach(employee.Department);
+                context.Employees.Add(employee);
+                context.SaveChanges();
+            }
         }
 
         public Employee GetEmployee(int id)

@@ -1,14 +1,25 @@
 ﻿using PowerCo.Model;
-using PowerCoWebSite.Data;
+using PowerCoWebSite.Data.Repositories;
 using PowerCoWebSite.Models;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 
 namespace PowerCoWebSite.ViewModels
 {
     public class NewEmployeeViewModel
     {
+        private IDepartmentRepository departmentRepository;
+        private IEmployeesRepository employeesRepository;
+
+        public NewEmployeeViewModel()
+        {
+            departmentRepository = new DepartmentRepository();
+            employeesRepository = new EmployeesRepository();
+            
+            Departments = departmentRepository.GetDepartments();
+            Positions = departmentRepository.GetEmployeePositions();      
+        }
+
         public int EmployeeId { get; set; }
 
         [Required, MaxLength(64)]
@@ -22,17 +33,22 @@ namespace PowerCoWebSite.ViewModels
         public List<Department> Departments { get; set; }
         public List<EmployeePosition> Positions { get; set; }
 
-        public NewEmployeeViewModel()
-        {
-            using (var context = new PowerCoEntity())
-            {
-                Departments = context.Deprtments.ToList();
-                Positions = context.EmployeePositions.ToList();
-            }
-        }
-
         public int SelectedDepartmentId { get; set; }
 
         public int SelectedPositionId { get; set; }
+
+        public void AddEmployee()
+        {
+            Employee employee = new Employee
+            {
+                FullName = FullName,
+                Head = Head,
+                Salary = Salary,
+                Position = departmentRepository.GetPosition(SelectedPositionId),
+                Department = departmentRepository.GetDepartment(SelectedDepartmentId)
+            };
+
+            employeesRepository.AddEmployee(employee);
+        }
     }
 }
