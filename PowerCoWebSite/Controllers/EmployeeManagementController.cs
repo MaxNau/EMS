@@ -1,7 +1,6 @@
 ﻿using PowerCo.Model;
 using PowerCoWebSite.Data;
 using PowerCoWebSite.ViewModels;
-using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -47,12 +46,14 @@ namespace PowerCoWebSite.Controllers
 
             using (var context = new PowerCoEntity())
             {
-                employee.Position= context.EmployeePositions.FirstOrDefault(d => d.Id== form.SelectedPositionId).Name;
-                employee.DepartmentName = context.Deprtments.FirstOrDefault(d => d.DepartmentId == form.SelectedDepartmentId).DepartmentName;
+                employee.Position= context.EmployeePositions.FirstOrDefault(d => d.Id== form.SelectedPositionId);
+                employee.Department = context.Deprtments.FirstOrDefault(d => d.DepartmentId == form.SelectedDepartmentId);
             }
 
             using (var context = new PowerCoEntity())
             {
+                context.EmployeePositions.Attach(employee.Position);
+                context.Deprtments.Attach(employee.Department);
                 context.Employees.Add(employee);
                 context.SaveChanges();
             }

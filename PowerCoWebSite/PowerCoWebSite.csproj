@@ -150,6 +150,10 @@
     <Compile Include="Migrations\201701171100025_pp.Designer.cs">
       <DependentUpon>201701171100025_pp.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701180809596_pwc.cs" />
+    <Compile Include="Migrations\201701180809596_pwc.Designer.cs">
+      <DependentUpon>201701180809596_pwc.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Employee.cs" />
@@ -191,6 +195,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201701171100025_pp.resx">
       <DependentUpon>201701171100025_pp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701180809596_pwc.resx">
+      <DependentUpon>201701180809596_pwc.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -19,7 +19,7 @@ namespace PowerCoWebSite.ViewModels
             {
                 Departments = context.Deprtments.ToList();
                 Positions = context.EmployeePositions.ToList();
-                LeadEmployees = context.Employees.Where(e => e.Position == "Lead").ToList();
+                LeadEmployees = context.Employees.Where(e => e.Position.Name == "Lead").ToList();
             }
         }
 
@@ -48,8 +48,8 @@ namespace PowerCoWebSite.ViewModels
         {
             using (var context = new PowerCoEntity())
             {
-                SelectedDepartmentId = context.Deprtments.FirstOrDefault(d => d.DepartmentName == Employee.DepartmentName).DepartmentId;
-                SelectedPositionId = context.EmployeePositions.FirstOrDefault(d => d.Name == Employee.Position).Id;
+                SelectedDepartmentId = context.Deprtments.FirstOrDefault(d => d.DepartmentName == Employee.Department.DepartmentName).DepartmentId;
+                SelectedPositionId = context.EmployeePositions.FirstOrDefault(d => d.Name == Employee.Position.Name).Id;
             }
         }
 
@@ -58,8 +58,8 @@ namespace PowerCoWebSite.ViewModels
             Employee employee = employeeRepository.GetEmployee(id);
             using (var context = new PowerCoEntity())
             {
-                employee.Position = context.EmployeePositions.FirstOrDefault(d => d.Id == SelectedPositionId).Name;
-                employee.DepartmentName = context.Deprtments.FirstOrDefault(d => d.DepartmentId == SelectedDepartmentId).DepartmentName;
+                employee.Position = context.EmployeePositions.FirstOrDefault(d => d.Id == SelectedPositionId);
+                employee.Department = context.Deprtments.FirstOrDefault(d => d.DepartmentId == SelectedDepartmentId);
                 employee.Head = context.Employees.FirstOrDefault(e => e.EmployeeId == SelectedHeadId).FullName;
             }
 

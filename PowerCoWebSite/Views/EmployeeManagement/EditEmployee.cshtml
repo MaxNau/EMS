@@ -25,14 +25,14 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Employee.DepartmentName, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Employee.Department.DepartmentName, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.DropDownListFor(model => model.SelectedDepartmentId, new SelectList(Model.Departments, "DepartmentId", "DepartmentName"))
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Employee.DepartmentName, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Employee.Position.Name, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.DropDownListFor(model => model.SelectedPositionId, new SelectList(Model.Positions, "Id", "Name"))
                 </div>

@@ -17,7 +17,10 @@ namespace PowerCoWebSite.Data.Repositories
         {
             using (var context = new PowerCoEntity())
             {
-                return context.Employees.FirstOrDefault(e => id == e.EmployeeId);
+                return context.Employees
+                              .Include(e => e.Department)
+                              .Include(e => e.Position)
+                              .FirstOrDefault(e => id == e.EmployeeId);
             }
         }
 
@@ -25,7 +28,10 @@ namespace PowerCoWebSite.Data.Repositories
         {
             using (var context = new PowerCoEntity())
             {
-                return context.Employees.ToList();
+                return context.Employees
+                              .Include(e => e.Department)
+                              .Include(e => e.Position)
+                              .ToList();
             }
         }
 

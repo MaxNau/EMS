@@ -25,11 +25,11 @@
                 <tr>
                     <td>@employee.EmployeeId</td>
                     <td>@employee.FullName</td>
-                    <td>@employee.DepartmentName</td>
-                <td>@employee.Position</td>
-                <td>@employee.Head</td>
-                <td>@employee.Salary</td>
-                <td>
+                    <td>@employee.Department.DepartmentName</td>
+                    <td>@employee.Position.Name</td>
+                    <td>@employee.Head</td>
+                    <td>@employee.Salary</td>
+                    <td>
                     <div class="btn-group">
                         <a href="@Url.Action("EditEmployee", new { id = employee.EmployeeId })" class="btn btn-xs btn-primary">
                             <i class="glyphicon glyphicon-edit"></i>
@@ -40,8 +40,8 @@
                             Remove
                         </a>
                     </div>
-                </td>
-            </tr>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
