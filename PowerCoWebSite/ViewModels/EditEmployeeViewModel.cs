@@ -1,9 +1,7 @@
 ﻿using PowerCo.Model;
-using PowerCoWebSite.Data;
 using PowerCoWebSite.Data.Repositories;
 using PowerCoWebSite.Models;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace PowerCoWebSite.ViewModels
 {
@@ -17,12 +15,9 @@ namespace PowerCoWebSite.ViewModels
             employeeRepository = new EmployeesRepository();
             departmentRepository = new DepartmentRepository();
 
-            using (var context = new PowerCoEntity())
-            {
-                Departments = context.Deprtments.ToList();
-                Positions = context.EmployeePositions.ToList();
-                LeadEmployees = context.Employees.Where(e => e.Position.Name == "Lead").ToList();
-            }
+            Departments = departmentRepository.GetDepartments();
+            Positions = departmentRepository.GetEmployeePositions();
+            LeadEmployees = employeeRepository.GetLeads();
         }
 
         public Employee Employee { get; set; }
@@ -43,11 +38,9 @@ namespace PowerCoWebSite.ViewModels
 
         public void SetDropDownListCurrentItems()
         {
-            using (var context = new PowerCoEntity())
-            {
-                SelectedDepartmentId = context.Deprtments.FirstOrDefault(d => d.DepartmentName == Employee.Department.DepartmentName).DepartmentId;
-                SelectedPositionId = context.EmployeePositions.FirstOrDefault(d => d.Name == Employee.Position.Name).Id;
-            }
+            SelectedDepartmentId = departmentRepository.GetDepartmentIdByName(Employee.Department.DepartmentName);
+            SelectedPositionId = departmentRepository.GetEmployeePositionIdByName(Employee.Position.Name);
+            SelectedHeadId = employeeRepository.GetHeadIdByName(Employee.Head);        
         }
 
         public void ModifyEmployee(int id)

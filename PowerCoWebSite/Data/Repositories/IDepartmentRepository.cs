@@ -10,5 +10,7 @@ namespace PowerCoWebSite.Data.Repositories
         Department GetDepartment(int id);
         List<Department> GetDepartments();
         List<EmployeePosition> GetEmployeePositions();
+        int GetDepartmentIdByName(string departmentName);
+        int GetEmployeePositionIdByName(string positionName);
     }
 }

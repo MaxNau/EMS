@@ -11,5 +11,7 @@ namespace PowerCoWebSite.Data.Repositories
         void RemoveEmployee(int id);
         void ModifyEmployee(int id, int selectedPositionId, int selectedDepartmentId, int? selectedHeadId, Employee employee);
         string GetHeadName(int headId);
+        List<Employee> GetLeads();
+        int GetHeadIdByName(string name);
     }
 }

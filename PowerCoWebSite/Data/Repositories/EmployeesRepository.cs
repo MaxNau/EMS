@@ -41,11 +41,27 @@ namespace PowerCoWebSite.Data.Repositories
             }
         }
 
+        public int GetHeadIdByName(string name)
+        {
+            using (var context = new PowerCoEntity())
+            {
+                return context.Employees.FirstOrDefault(e => e.FullName == name).EmployeeId;
+            }
+        }
+
         public string GetHeadName(int headId)
         {
             using (var context = new PowerCoEntity())
             {
                 return context.Employees.FirstOrDefault(e => e.EmployeeId == headId).FullName;
+            }
+        }
+
+        public List<Employee> GetLeads()
+        {
+            using (var context = new PowerCoEntity())
+            {
+                return context.Employees.Where(e => e.Position.Name == "Lead").ToList();
             }
         }
 

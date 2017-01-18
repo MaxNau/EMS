@@ -17,7 +17,8 @@ namespace PowerCoWebSite.ViewModels
             employeesRepository = new EmployeesRepository();
             
             Departments = departmentRepository.GetDepartments();
-            Positions = departmentRepository.GetEmployeePositions();      
+            Positions = departmentRepository.GetEmployeePositions();
+            LeadEmployees = employeesRepository.GetLeads();
         }
 
         public int EmployeeId { get; set; }
@@ -32,6 +33,7 @@ namespace PowerCoWebSite.ViewModels
         public double Salary { get; set; }
         public List<Department> Departments { get; set; }
         public List<EmployeePosition> Positions { get; set; }
+        public List<Employee> LeadEmployees { get; set; }
 
         public int SelectedDepartmentId { get; set; }
 

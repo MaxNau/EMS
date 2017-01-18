@@ -16,11 +16,27 @@ namespace PowerCoWebSite.Data.Repositories
             }
         }
 
+        public int GetDepartmentIdByName(string departmentName)
+        {
+            using (var context = new PowerCoEntity())
+            {
+                return context.Deprtments.FirstOrDefault(d => d.DepartmentName == departmentName).DepartmentId;
+            }
+        }
+
         public List<Department> GetDepartments()
         {
             using (var context = new PowerCoEntity())
             {
                 return context.Deprtments.ToList();
+            }
+        }
+
+        public int GetEmployeePositionIdByName(string positionName)
+        {
+            using (var context = new PowerCoEntity())
+            { 
+                return context.EmployeePositions.FirstOrDefault(d => d.Name == positionName).Id;
             }
         }
 
