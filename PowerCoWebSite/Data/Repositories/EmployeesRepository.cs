@@ -53,7 +53,7 @@ namespace PowerCoWebSite.Data.Repositories
         {
             using (var context = new PowerCoEntity())
             {
-                Employee emp = context.Employees.FirstOrDefault(e=> e.EmployeeId == 32);
+                Employee emp = context.Employees.FirstOrDefault(e=> e.EmployeeId == id);
                 emp.Salary = employee.Salary;
                 emp.FullName = employee.FullName;
                 emp.Department = employee.Department;
