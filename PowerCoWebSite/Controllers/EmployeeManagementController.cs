@@ -1,7 +1,4 @@
-﻿using PowerCo.Model;
-using PowerCoWebSite.Data;
-using PowerCoWebSite.ViewModels;
-using System.Linq;
+﻿using PowerCoWebSite.ViewModels;
 using System.Web.Mvc;
 
 namespace PowerCoWebSite.Controllers

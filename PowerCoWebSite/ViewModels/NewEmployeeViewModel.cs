@@ -37,16 +37,21 @@ namespace PowerCoWebSite.ViewModels
 
         public int SelectedPositionId { get; set; }
 
+        public int? SelectedHeadId { get; set; }
+
         public void AddEmployee()
         {
             Employee employee = new Employee
             {
                 FullName = FullName,
-                Head = Head,
                 Salary = Salary,
                 Position = departmentRepository.GetPosition(SelectedPositionId),
                 Department = departmentRepository.GetDepartment(SelectedDepartmentId)
             };
+
+            if (SelectedHeadId != null)
+                employee.Head = employeesRepository.GetHeadName(SelectedHeadId.Value);
+            else employee.Head = "";
 
             employeesRepository.AddEmployee(employee);
         }

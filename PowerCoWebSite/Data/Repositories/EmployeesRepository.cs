@@ -2,6 +2,7 @@
 using PowerCo.Model;
 using System.Linq;
 using System.Data.Entity;
+using System;
 
 namespace PowerCoWebSite.Data.Repositories
 {
@@ -40,11 +41,31 @@ namespace PowerCoWebSite.Data.Repositories
             }
         }
 
-        public void ModifyEmployee(Employee employee)
+        public string GetHeadName(int headId)
         {
             using (var context = new PowerCoEntity())
             {
-                context.Entry(employee).State = EntityState.Modified;
+                return context.Employees.FirstOrDefault(e => e.EmployeeId == headId).FullName;
+            }
+        }
+
+        public void ModifyEmployee(int id, int selectedPositionId, int selectedDepartmentId, int? selectedHeadId, Employee employee)
+        {
+            using (var context = new PowerCoEntity())
+            {
+                Employee emp = context.Employees.FirstOrDefault(e=> e.EmployeeId == 32);
+                emp.Salary = employee.Salary;
+                emp.FullName = employee.FullName;
+                emp.Department = employee.Department;
+                emp.Position = context.EmployeePositions.FirstOrDefault(d => d.Id == selectedPositionId);
+                emp.Department = context.Deprtments.FirstOrDefault(d => d.DepartmentId == selectedDepartmentId);
+                if (selectedHeadId != null)
+                    emp.Head = GetHeadName(selectedHeadId.Value);
+                else emp.Head = "";
+
+                emp.Salary = employee.Salary;
+                emp.FullName = employee.FullName;
+                context.Entry(emp).State = EntityState.Modified;
                 context.SaveChanges();
             }
         }

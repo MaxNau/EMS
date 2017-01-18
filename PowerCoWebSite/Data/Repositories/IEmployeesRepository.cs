@@ -9,6 +9,7 @@ namespace PowerCoWebSite.Data.Repositories
         Employee GetEmployee(int id);
         void AddEmployee(Employee employee);
         void RemoveEmployee(int id);
-        void ModifyEmployee(Employee employee);
+        void ModifyEmployee(int id, int selectedPositionId, int selectedDepartmentId, int? selectedHeadId, Employee employee);
+        string GetHeadName(int headId);
     }
 }

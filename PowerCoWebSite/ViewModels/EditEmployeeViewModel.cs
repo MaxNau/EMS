@@ -10,10 +10,12 @@ namespace PowerCoWebSite.ViewModels
     public class EditEmployeeViewModel
     {
         private IEmployeesRepository employeeRepository;
+        private IDepartmentRepository departmentRepository;
 
         public EditEmployeeViewModel()
         {
             employeeRepository = new EmployeesRepository();
+            departmentRepository = new DepartmentRepository();
 
             using (var context = new PowerCoEntity())
             {
@@ -23,11 +25,6 @@ namespace PowerCoWebSite.ViewModels
             }
         }
 
-        /*  public string FullName { get; set; }
-          public string DepartmentName { get; set; }
-          public string Position { get; set; }
-          public string Head { get; set; }
-          public double Salary { get; set; }*/
         public Employee Employee { get; set; }
         public List<Department> Departments { get; set; }
         public List<EmployeePosition> Positions { get; set; }
@@ -37,7 +34,7 @@ namespace PowerCoWebSite.ViewModels
 
         public int SelectedPositionId { get; set; }
 
-        public int SelectedHeadId { get; set; }
+        public int? SelectedHeadId { get; set; }
 
         public void GetEmployee(int id)
         {
@@ -55,18 +52,12 @@ namespace PowerCoWebSite.ViewModels
 
         public void ModifyEmployee(int id)
         {
-            Employee employee = employeeRepository.GetEmployee(id);
-            using (var context = new PowerCoEntity())
-            {
-                employee.Position = context.EmployeePositions.FirstOrDefault(d => d.Id == SelectedPositionId);
-                employee.Department = context.Deprtments.FirstOrDefault(d => d.DepartmentId == SelectedDepartmentId);
-                employee.Head = context.Employees.FirstOrDefault(e => e.EmployeeId == SelectedHeadId).FullName;
-            }
+            Employee employee = new Employee();
 
             employee.Salary = Employee.Salary;
             employee.FullName = Employee.FullName;
 
-            employeeRepository.ModifyEmployee(employee);
+            employeeRepository.ModifyEmployee(id, SelectedPositionId, SelectedDepartmentId, SelectedHeadId, employee);
         }
 
         public void RemoveEmployee(int id)
